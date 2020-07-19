@@ -19,16 +19,18 @@ project.ext.TMP_DIR   = project.buildDir.toString() + '/downloads'
 
 buildscript {
     repositories {
+        google()
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.android.tools.build:gradle:4.0.1'
     }
 }
 
 allprojects {
     repositories {
+        google()
         jcenter()
     }
 }
@@ -74,7 +76,7 @@ android {
     defaultConfig {
         applicationId "com.vackosar.youtubereader"
         minSdkVersion 11
-        targetSdkVersion 11
+        targetSdkVersion 25
         versionCode 1
         versionName "1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -92,10 +94,11 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'commons-lang:commons-lang:2.3'
     testCompile 'junit:junit:4.12'
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+    compile 'org.tensorflow:tensorflow-android:1.13.1'
 }
 
 task buildNativeBazel() {
