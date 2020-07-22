@@ -9,18 +9,17 @@ import java.net.URL;
 public class CapsDownloader {
 
     private static final int MAX_RETRY = 2;
-    private static final String VIDEO_INFO_PREFIX = "http://www.youtube.com/get_video_info?video_id=";
+    private static final String VIDEO_INFO_PREFIX = "https://www.youtube.com/get_video_info?video_id=";
     private static final String SLASH_PREFIX = "^/";
     private static final String EMPTY = "";
     private static final String DESKTOP_URL = "www.youtube.com";
     private static final String MOBILE_URL = "m.youtube.com";
     private static final String SHORT_URL = "youtu.be";
-    private static final String TITLE_TOKEN = "title";
 
     public Result download(String uri) {
         try {
             String videoInfo = convertStreamToString(createVideoInfoUrl(uri).openConnection().getInputStream());
-            String title = VideoInfoParser.extractTokenValue(TITLE_TOKEN, videoInfo);
+            String title = VideoInfoParser.extractTitle(videoInfo);
             String captionsUrl = VideoInfoParser.extractCaptionsUrl(videoInfo);
             String captions = convertStreamToString(new URL(captionsUrl).openConnection().getInputStream());
             String text = extractText(captions);

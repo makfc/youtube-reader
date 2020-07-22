@@ -8,6 +8,7 @@ import java.net.URLDecoder;
 
 public class VideoInfoParser {
 
+    private static final String TITLE_TOKEN = "title";
     private static final String CAPTIONS_TOKEN = "caption_tracks";
     private static final String URL_TOKEN = "u";
     private static final String QUERY_SEPARATOR = "([&?])";
@@ -16,6 +17,17 @@ public class VideoInfoParser {
     private static final String EQUALS = "=";
     private static final String LANG_TOKEN = "lang";
     private static final String EN_LANG_TOKEN_VALUE = "en";
+
+    public static String extractTitle(String videoInfo) {
+        String playerResponse = extractTokenValue("player_response", videoInfo);
+        try {
+            return new JSONObject(playerResponse)
+                    .getJSONObject("videoDetails")
+                    .getString(TITLE_TOKEN);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static String extractCaptionsUrl(String videoInfo) {
         return setTokenValue(LANG_TOKEN, EN_LANG_TOKEN_VALUE, getDefaultLangCaptionsUrl(videoInfo));
