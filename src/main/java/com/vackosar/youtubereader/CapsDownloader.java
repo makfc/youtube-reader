@@ -9,7 +9,7 @@ import java.net.URL;
 public class CapsDownloader {
 
     private static final int MAX_RETRY = 2;
-    private static final String VIDEO_INFO_PREFIX = "https://www.youtube.com/get_video_info?video_id=";
+    private static final String VIDEO_INFO_PREFIX = "https://www.youtube.com/get_video_info?html5=1&el=embedded&video_id=";
     private static final String SLASH_PREFIX = "^/";
     private static final String EMPTY = "";
     private static final String DESKTOP_URL = "www.youtube.com";
